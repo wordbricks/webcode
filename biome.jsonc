@@ -1,0 +1,140 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useGenericFontNames": "warn",
+        "useButtonType": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useKeyWithMouseEvents": "warn",
+        "useMediaCaption": "warn",
+        "noNoninteractiveTabindex": "warn",
+        "useSemanticElements": "warn",
+        "useFocusableInteractive": "warn",
+        "noStaticElementInteractions": "warn"
+      },
+      "correctness": {
+        "noUnusedVariables": {
+          "level": "warn",
+          "fix": "none",
+          "options": {}
+        },
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "fix": "none",
+          "options": {}
+        },
+        "noSwitchDeclarations": "warn",
+        "noUnsafeOptionalChaining": "warn",
+        "noUnusedImports": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {}
+        },
+        "noUnknownMediaFeatureName": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "fix": "safe",
+          "options": {
+            "attributes": [
+              "classList"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "tw"
+            ]
+          }
+        }
+      },
+      "style": {
+        "useImportType": "warn",
+        "useSelfClosingElements": "off",
+        "noUnusedTemplateLiteral": "off",
+        "noNonNullAssertion": "warn",
+        "noUselessElse": "off",
+        "useTemplate": "warn",
+        "useShorthandFunctionType": "warn",
+        "useExponentiationOperator": "warn",
+        "noParameterAssign": "warn",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSingleVarDeclarator": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noAssignInExpressions": "warn",
+        "noArrayIndexKey": "warn",
+        "noAsyncPromiseExecutor": "off",
+        "noDuplicateFontNames": "warn",
+        "noFallthroughSwitchClause": "warn",
+        "noControlCharactersInRegex": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noShorthandPropertyOverrides": "off",
+        "noDuplicateProperties": "warn",
+        "noFocusedTests": {
+          "level": "warn",
+          "fix": "none",
+          "options": {}
+        }
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noStaticOnlyClass": "off",
+        "noBannedTypes": "warn",
+        "noUselessFragments": "warn",
+        "noUselessSwitchCase": "warn",
+        "useLiteralKeys": "off",
+        "noArguments": "warn",
+        "noCommaOperator": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn",
+        "noGlobalEval": "warn"
+      },
+      "performance": {
+        "noAccumulatingSpread": "warn"
+      }
+    },
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/.wxt",
+      "!**/.wrangler"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "enabled": true,
+    "lineWidth": 80,
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/.wxt",
+      "!**/.wrangler"
+    ]
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  }
+}
