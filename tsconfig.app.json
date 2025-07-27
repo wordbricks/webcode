@@ -24,13 +24,18 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "types": [
+      "./worker-configuration.d.ts",
+      "vite/client"
+    ],
     "paths": {
       "@/*": [
-        "./src/*"
-      ]
+        "./*"
+      ],
     },
   },
   "include": [
-    "src"
+    "src",
+    "worker",
   ]
 }

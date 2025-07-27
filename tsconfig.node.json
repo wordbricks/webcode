@@ -22,11 +22,13 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "@/*": [
-        "./src/*"
-      ]
+        "./*"
+      ],
     },
   },
   "include": [
-    "vite.config.ts"
+    "vite.config.ts",
+    "src",
+    "worker"
   ]
 }

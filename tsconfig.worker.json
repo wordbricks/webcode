@@ -6,9 +6,15 @@
       "./worker-configuration.d.ts",
       "vite/client"
     ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+    },
   },
   "include": [
     "./worker-configuration.d.ts",
-    "./worker"
+    "src",
+    "worker"
   ]
 }
