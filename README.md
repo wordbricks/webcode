@@ -1,4 +1,4 @@
-# WebCode - Claude Code in the Browser
+# WebCode - Claude Code in your web browser
 
 <div align="center">
   
