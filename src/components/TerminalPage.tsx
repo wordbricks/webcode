@@ -61,49 +61,12 @@ export const TerminalPage = () => {
 
         await wait(1000);
 
-        // move all files, folders to .global directory recursively
         await spawn("mkdir", ["-p", "../.global/src"]);
         await spawn("mv", ["git.ts", "../.global/src/git.ts"]);
-        // await spawn("chmod", ["+x", "../.global/src/git.sh"]);
         await spawn("mv", ["package.json", "../.global/package.json"]);
+        await spawn("mv", ["pnpm-lock.yaml", "../.global/pnpm-lock.yaml"]);
 
         await spawn("pnpm", ["i", "--prefix", "../.global"]);
-
-        // await writeFile(
-        //   ".claude.json",
-        //   JSON.stringify(
-        //     {
-        //       numStartups: 0,
-        //       installMethod: "unknown",
-        //       autoUpdates: true,
-        //       firstStartTime: "2025-07-16T16:24:34.488Z",
-        //       projects: {},
-        //       hasCompletedOnboarding: true,
-        //       lastOnboardingVersion: "1.0.61",
-        //       subscriptionNoticeCount: 0,
-        //       hasAvailableSubscription: false,
-        //       lastReleaseNotesSeen: "1.0.61",
-        //       fallbackAvailableWarningThreshold: 0.2,
-        //       isQualifiedForDataSharing: false,
-        //     },
-        //     null,
-        //     2,
-        //   ),
-        // );
-        // await spawn("mv", [".claude.json", "../.claude.json"]);
-        // await writeFile(
-        //   ".credentials.json",
-        //   JSON.stringify({
-        //     claudeAiOauth: {
-        //       accessToken: "",
-        //       refreshToken: "",
-        //       expiresAt: 1752862210229,
-        //       scopes: ["user:inference", "user:profile"],
-        //       subscriptionType: "max",
-        //     },
-        //   }),
-        // );
-        // await spawn("pnpm", ["i"]);
       })();
     }
   }, [state.status, container, mount]);
