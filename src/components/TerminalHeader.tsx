@@ -1,6 +1,6 @@
 "use client";
 
-import { Circle, Terminal as TerminalIcon } from "lucide-react";
+import { Circle, Github, Terminal as TerminalIcon } from "lucide-react";
 import type { FC } from "react";
 import { Badge } from "@/src/components/ui/badge";
 import { cn } from "@/src/utils/cn";
@@ -58,26 +58,36 @@ export const TerminalHeader: FC<TerminalHeaderProps> = ({
         <div className="flex items-center gap-2">
           <TerminalIcon className="h-4 w-4 text-zinc-400" />
           <span className="font-medium text-sm text-zinc-200">Terminal</span>
+
+          <Badge
+            variant="outline"
+            className="ml-1 flex items-center gap-1.5 border-zinc-700 bg-zinc-900/50 px-2 py-0.5 text-zinc-300"
+          >
+            <div className="relative">
+              <div className={cn("h-1.5 w-1.5 rounded-full", config.color)} />
+              {config.pulse && (
+                <div
+                  className={cn(
+                    "absolute inset-0 h-1.5 w-1.5 animate-ping rounded-full",
+                    config.color,
+                  )}
+                />
+              )}
+            </div>
+            <span className="text-xs">{config.text}</span>
+          </Badge>
         </div>
       </div>
 
-      <Badge
-        variant="outline"
-        className="flex items-center gap-2 border-zinc-700 bg-zinc-900/50 text-zinc-300"
+      <a
+        href="https://github.com/wordbricks/webcode"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center rounded-md p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
+        aria-label="View on GitHub"
       >
-        <div className="relative">
-          <div className={cn("h-2 w-2 rounded-full", config.color)} />
-          {config.pulse && (
-            <div
-              className={cn(
-                "absolute inset-0 h-2 w-2 animate-ping rounded-full",
-                config.color,
-              )}
-            />
-          )}
-        </div>
-        <span className="text-xs">{config.text}</span>
-      </Badge>
+        <Github className="h-4 w-4" />
+      </a>
     </div>
   );
 };

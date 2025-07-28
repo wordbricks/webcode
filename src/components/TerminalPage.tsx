@@ -16,6 +16,7 @@ export const TerminalPage = () => {
   const [terminalProcess, setTerminalProcess] =
     useState<WebContainerProcess | null>(null);
   const [terminalReady, setTerminalReady] = useState(false);
+  const [setupComplete, setSetupComplete] = useState(false);
   const terminalComponentRef = useRef<TerminalHandle | null>(null);
 
   const startShell = useCallback(async () => {
@@ -47,7 +48,7 @@ export const TerminalPage = () => {
     } catch (error) {
       console.error("Failed to start shell:", error);
     }
-  }, [container, spawn, terminalProcess, terminalReady]);
+  }, [container, spawn, terminalProcess, terminalReady, writeFile]);
 
   const handleTerminalReady = useCallback(() => {
     setTerminalReady(true);
@@ -67,9 +68,11 @@ export const TerminalPage = () => {
         await spawn("mv", ["pnpm-lock.yaml", "../.global/pnpm-lock.yaml"]);
 
         await spawn("pnpm", ["i", "--prefix", "../.global"]);
+        
+        setSetupComplete(true);
       })();
     }
-  }, [state.status, container, mount]);
+  }, [state.status, container, mount, spawn]);
 
   useEffect(() => {
     if (
@@ -89,25 +92,31 @@ export const TerminalPage = () => {
     [terminalProcess],
   );
 
-  if (state.status === "idle" || state.status === "booting") {
+  if (state.status === "idle" || state.status === "booting" || !setupComplete) {
     return (
-      <div className="flex h-screen w-screen flex-col bg-black">
-        <LoadingState />
+      <div className="flex h-screen w-screen flex-col bg-zinc-950">
+        <TerminalHeader status={state.status} />
+        <div className="flex flex-1 overflow-hidden">
+          <LoadingState className="flex-1" />
+        </div>
       </div>
     );
   }
 
   if (state.status === "error") {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-black">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="text-6xl">💥</div>
-          <h1 className="font-bold text-2xl text-red-500">
-            WebContainer Error
-          </h1>
-          <p className="max-w-md text-sm text-zinc-400">
-            {state.error?.message || "Failed to initialize WebContainer"}
-          </p>
+      <div className="flex h-screen w-screen flex-col bg-zinc-950">
+        <TerminalHeader status={state.status} />
+        <div className="flex flex-1 items-center justify-center overflow-hidden">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div className="text-6xl">💥</div>
+            <h1 className="font-bold text-2xl text-red-500">
+              WebContainer Error
+            </h1>
+            <p className="max-w-md text-sm text-zinc-400">
+              {state.error?.message || "Failed to initialize WebContainer"}
+            </p>
+          </div>
         </div>
       </div>
     );
