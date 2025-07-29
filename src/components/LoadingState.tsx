@@ -10,7 +10,7 @@ export const LoadingState: FC<LoadingStateProps> = ({ className }) => {
   return (
     <div
       className={cn(
-        "flex h-dvh w-full items-center justify-center bg-black",
+        "-mt-16 flex h-dvh w-full items-center justify-center bg-black",
         className,
       )}
     >

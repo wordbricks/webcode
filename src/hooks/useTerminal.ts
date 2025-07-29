@@ -36,7 +36,7 @@ export const useTerminal = (
 
       const term = new Terminal({
         convertEol: true,
-        fontSize: isMobile ? 11 : 14,
+        fontSize: isMobile ? 12 : 14,
         fontFamily: '"JetBrains Mono", "Cascadia Code", "Fira Code", monospace',
         theme: {
           background: "#000000",

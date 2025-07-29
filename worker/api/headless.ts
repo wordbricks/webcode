@@ -1,7 +1,5 @@
 import { Hono } from "hono";
 import { html } from "hono/html";
-import { getEnv } from "@/src/utils/getEnv";
-import { HOST } from "@/src/utils/host";
 
 export const headless = new Hono()
   //
@@ -9,6 +7,12 @@ export const headless = new Hono()
     "/",
     //
     async (c) => {
+      const { req } = c;
+
+      const referer = req.header("referer") || req.url;
+
+      const { origin } = new URL(referer);
+
       return c.html(
         html`
 <!DOCTYPE html>
@@ -27,7 +31,7 @@ export const headless = new Hono()
     <script type="application/json" id="webcontainer-context">
                 {
                     "options": {
-                        "baseUrl": "${HOST.WEBCODE[getEnv()]}",
+                        "baseUrl": "${origin}",
                         "initOptions": {
                             "server": "https://local-corp.webcontainer-api.io",
                             "isolationPolicy": "require-corp",

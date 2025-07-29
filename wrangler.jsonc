@@ -17,7 +17,9 @@
 		"run_worker_first": [
 			"/api/headless",
 			"/iframe",
+			"/blitz.96435430.js",
 			"/iframe-webkit.96435430.html",
+			"/headless-siO4QJGT.js",
 			"/fetch.worker.96435430.js",
 			"/filesystem-worker.96435430.js",
 			"/webcontainer.96435430.js",

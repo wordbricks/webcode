@@ -19,7 +19,7 @@ export const proxy = new Hono()
         delete headers["x-forwarded-for"];
         delete headers["x-forwarded-port"];
         delete headers["x-forwarded-proto"];
-        headers["user-agent"] = "claude-cli/1.0.54 (external, cli)";
+        headers["user-agent"] = "claude-cli (external, cli)";
         delete headers["via"];
 
         const body = await c.req.json();
@@ -33,7 +33,7 @@ export const proxy = new Hono()
       }
 
       if (url.startsWith("localhost")) {
-        const res = await honoProxy(`http://${url}`, {
+        const res = await honoProxy(`${url}`, {
           ...c.req,
         });
 
