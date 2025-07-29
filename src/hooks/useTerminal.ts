@@ -67,7 +67,6 @@ export const useTerminal = (
       term.loadAddon(fitAddon);
 
       if (terminalElementRef.current) {
-        console.log("open!");
         term.open(terminalElementRef.current);
       }
 

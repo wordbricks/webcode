@@ -4,6 +4,7 @@ import { authCallback } from "@/worker/api/authCallback";
 import { blitz } from "@/worker/api/blitz";
 import { fetchWorker } from "@/worker/api/fetch.worker";
 import { fileSystemWorker } from "@/worker/api/filesystem.worker";
+import { fullBin } from "@/worker/api/fullBin";
 import { headlessScript } from "@/worker/api/headlessScript";
 import { iframe } from "@/worker/api/iframe";
 import { iframeMain } from "@/worker/api/iframe.main";
@@ -22,6 +23,7 @@ const app = new Hono()
   .route("/callback", authCallback)
   .route("/blitz.96435430.js", blitz)
   .route("/iframe-webkit.96435430.html", iframe)
+  .route("/full_bin_index.96435430", fullBin)
   .route("/headless-siO4QJGT.js", headlessScript)
   .route("/fetch.worker.96435430.js", fetchWorker)
   .route("/iframe.main.96435430.js", iframeMain)
