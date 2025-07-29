@@ -2,6 +2,7 @@ import { FitAddon } from "@xterm/addon-fit";
 import type { Terminal } from "@xterm/xterm";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useEffectOnce } from "@/src/hooks/useEffectOnce";
+import { useIsMobile } from "@/src/hooks/useIsMobile";
 
 type UseTerminalOptions = {
   onData?: (data: string) => void;
@@ -25,6 +26,7 @@ export const useTerminal = (
   const [dimensions, setDimensions] = useState({ cols: 80, rows: 10 });
   const terminalElementRef = useRef<HTMLDivElement | null>(null);
   const fitAddonRef = useRef<FitAddon | null>(null);
+  const isMobile = useIsMobile();
 
   useEffectOnce(() => {
     if (!terminalElementRef.current || typeof window === "undefined") return;
@@ -34,7 +36,7 @@ export const useTerminal = (
 
       const term = new Terminal({
         convertEol: true,
-        fontSize: 14,
+        fontSize: isMobile ? 11 : 14,
         fontFamily: '"JetBrains Mono", "Cascadia Code", "Fira Code", monospace',
         theme: {
           background: "#000000",
@@ -68,6 +70,7 @@ export const useTerminal = (
         console.log("open!");
         term.open(terminalElementRef.current);
       }
+
       fitAddon.fit();
 
       const { cols, rows } = term;
@@ -127,6 +130,8 @@ export const useTerminal = (
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [fit]);
+
+  // useInterval(fit, 5000);
 
   return {
     terminal,

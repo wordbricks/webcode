@@ -17,8 +17,10 @@
 		"run_worker_first": [
 			"/api/headless",
 			"/iframe",
+			"/iframe-webkit.96435430.html",
 			"/fetch.worker.96435430.js",
 			"/filesystem-worker.96435430.js",
+			"/webcontainer.96435430.js",
 			"/api/v1/*"
 		]
 	},

@@ -14,7 +14,7 @@ export const iframe = new Hono()
 
 <head>
 	<meta charset="utf-8" />
-	<script src="/iframe.main.96435430.js"></script>
+	<script src="iframe.main.96435430.js"></script>
 </head>
 
 <body></body>

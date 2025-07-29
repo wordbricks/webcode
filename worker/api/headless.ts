@@ -17,6 +17,8 @@ export const headless = new Hono()
 <head>
     <title>StackBlitz</title>
     <script src="/webcontainer.96435430.js"></script>
+    <link rel="preload" as="script" href="/webcontainer.96435430.js" fetchpriority="low">
+    <link rel="preload" as="script" href="/fetch.worker.96435430.js" fetchpriority="low">
     <script src="/headless-siO4QJGT.js" crossorigin="anonymous" type="module"></script>
     <link rel="modulepreload" href="/semver-Zyv2pDaP.js" as="script" crossorigin="anonymous">
 </head>
@@ -43,7 +45,7 @@ export const headless = new Hono()
                     },
                     "authenticationRequired": false,
                     "embedder": "/",
-                    "embedderId": "home",
+                    "embedderId": "813lgxqqmjqh07iwi7c1i1grfg664t",
                     "shortAppId": false,
                     "refreshInterval": 43200
                 }</script>

@@ -1,8 +1,5 @@
 import { Hono } from "hono";
-
-type Bindings = {
-  ASSETS: Fetcher;
-};
+import type { Bindings } from "@/worker";
 
 export const fetchWorker = new Hono<{ Bindings: Bindings }>()
   //
@@ -10,17 +7,8 @@ export const fetchWorker = new Hono<{ Bindings: Bindings }>()
     "/",
     //
     async ({ env, req }) => {
-      console.log(req.url);
+      const res = await fetch(`${env.ASSET_URL}/fetch.worker.96435430.js`);
 
-      const res = await env.ASSETS.fetch(
-        new URL("/fetch.worker.96435430.js", req.url),
-      );
-
-      return new Response(res.body, {
-        headers: {
-          "Cross-Origin-Embedder-Policy": "require-corp",
-          "Cross-Origin-Opener-Policy": "same-origin",
-        },
-      });
+      return res;
     },
   );

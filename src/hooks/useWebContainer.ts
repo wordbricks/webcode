@@ -48,18 +48,31 @@ export const useWebContainer = (): UseWebContainerReturn => {
 
       try {
         const { WebContainer } = await import("@webcontainer/api");
-        const instance = await WebContainer.boot();
+        const instance = await WebContainer.boot({
+          // coep: "require-corp",
+          workdirName: "home",
+          forwardPreviewErrors: true,
+        });
 
-        instance.on("xdg-open", (e) => {
-          console.log("xdg-open event:", e);
+        instance.on("xdg-open", (url) => {
+          const authUrl = new URL(url);
+          authUrl.searchParams.set(
+            "redirect_uri",
+            `https://console.anthropic.com/oauth/code/callback`,
+          );
+
+          console.log("xdg-open event:", `${authUrl}`);
+
+          window.open(`${authUrl}`, "_blank");
         });
         instance.on("code", (e) => console.log("code event:", e));
-        instance.on("port", (e) => console.error("port event:", e));
+        instance.on("port", (e) => console.log("port event:", e));
         instance.on("preview-message", (e) =>
           console.error("preview-message event:", e),
         );
 
-        instance.on("server-ready", (_port, url) => {
+        instance.on("server-ready", (port, url) => {
+          console.log("Server ready at:", port, `${url}`);
           setState((prev) => ({ ...prev, serverUrl: url }));
         });
 

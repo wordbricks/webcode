@@ -24,7 +24,7 @@ export const LoadingState: FC<LoadingStateProps> = ({ className }) => {
 
         <div className="flex flex-col items-center gap-2">
           <h2 className="font-semibold text-lg text-zinc-200">
-            Initializing WebContainer
+            Initializing Container...
           </h2>
           <p className="text-sm text-zinc-500">
             Setting up your development environment...

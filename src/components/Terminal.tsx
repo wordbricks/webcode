@@ -10,6 +10,7 @@ import {
   useImperativeHandle,
   useRef,
 } from "react";
+import { useInterval } from "@/src/hooks/useInterval";
 import { useTerminal } from "@/src/hooks/useTerminal";
 import { cn } from "@/src/utils/cn";
 
@@ -48,6 +49,8 @@ export const Terminal = ({
       processRef.current?.resize({ cols, rows });
     },
   });
+
+  useInterval(() => processRef.current?.resize({ cols, rows }), 5000);
 
   const connectProcess = useCallback(
     async (process: WebContainerProcess) => {

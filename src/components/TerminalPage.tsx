@@ -68,7 +68,7 @@ export const TerminalPage = () => {
         await spawn("mv", ["pnpm-lock.yaml", "../.global/pnpm-lock.yaml"]);
 
         await spawn("pnpm", ["i", "--prefix", "../.global"]);
-        
+
         setSetupComplete(true);
       })();
     }
@@ -127,8 +127,8 @@ export const TerminalPage = () => {
       <TerminalHeader status={state.status} />
       <div className="flex flex-1 overflow-hidden">
         <div className="flex flex-1 flex-col overflow-hidden">
-          <div className="relative flex-1 overflow-hidden p-4">
-            <div className="absolute inset-4 overflow-hidden rounded-lg border border-zinc-800 bg-black shadow-2xl">
+          <div className="relative flex-1 overflow-hidden p-0 sm:p-2">
+            <div className="absolute inset-0 overflow-hidden rounded-none border-0 border-zinc-800 bg-black shadow-2xl sm:inset-2 sm:rounded-lg sm:border">
               <Terminal
                 ref={terminalComponentRef}
                 className="h-full w-full"

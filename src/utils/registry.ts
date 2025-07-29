@@ -4,7 +4,6 @@ const loadTemplateFiles = async (templateName: string) => {
   const fileList = [
     //
     "package.json",
-    "pnpm-lock.yaml",
     "src/git.ts",
   ];
 
@@ -28,7 +27,6 @@ export const templates = {
 
     return {
       "package.json": files["package.json"],
-      "pnpm-lock.yaml": files["pnpm-lock.yaml"],
       "git.ts": files["src/git.ts"],
     };
   },
