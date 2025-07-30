@@ -32,6 +32,17 @@ export const proxy = new Hono()
         return res;
       }
 
+      if (url.includes("wttr.in")) {
+        headers["user-agent"] = "curl/7.64.1";
+
+        const res = await fetch(`https://${url}`, {
+          headers,
+          method: c.req.method,
+          body: c.req.raw.body,
+        });
+        return res;
+      }
+
       if (url.startsWith("localhost")) {
         const res = await honoProxy(`${url}`, {
           ...c.req,
