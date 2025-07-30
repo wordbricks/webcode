@@ -14,6 +14,14 @@
 
 WebCode brings the power of Claude Code directly to your browser using WebContainer technology. No installations, no setup hassles - just open your browser and start coding with Claude's assistance in a full-featured terminal environment.
 
+## 🎥 Video
+
+<p align="center">
+  <a href="https://github.com/user-attachments/assets/02a082d4-a864-474b-9dae-0304046d3153">
+    <img src="https://github.com/user-attachments/assets/02a082d4-a864-474b-9dae-0304046d3153" width="100%" alt="Demo video">
+  </a>
+</p>
+
 ### ✨ Features
 
 - **🌐 Browser-Based**: Runs entirely in your browser - no backend servers required
