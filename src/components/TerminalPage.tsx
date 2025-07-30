@@ -89,7 +89,11 @@ export const TerminalPage = () => {
         await spawn("mv", ["package.json", "../.global/package.json"]);
         await spawn("mv", ["pnpm-lock.yaml", "../.global/pnpm-lock.yaml"]);
 
-        await spawn("pnpm", ["i", "--prefix", "../.global"]);
+        const pnpmProcess = await spawn("pnpm", ["i", "--prefix", "../.global"]);
+        const exitCode = await pnpmProcess.exit;
+        if (exitCode !== 0) {
+          throw new Error('pnpm install failed');
+        }
 
         setSetupComplete(true);
       })();
