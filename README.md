@@ -16,11 +16,10 @@ WebCode brings the power of Claude Code directly to your browser using WebContai
 
 ## 🎥 Video
 
-<p align="center">
-  <a href="https://github.com/user-attachments/assets/02a082d4-a864-474b-9dae-0304046d3153">
-    <img src="https://github.com/user-attachments/assets/02a082d4-a864-474b-9dae-0304046d3153" width="100%" alt="Demo video">
-  </a>
-</p>
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/02a082d4-a864-474b-9dae-0304046d3153" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### ✨ Features
 
