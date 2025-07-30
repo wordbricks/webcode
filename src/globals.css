@@ -130,4 +130,21 @@
       height: -webkit-fill-available;
     }
   }
+  
+  /* Mobile terminal scrolling fix */
+  @media (max-width: 640px) {
+    .xterm {
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .xterm-viewport {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .xterm-screen {
+      overflow-y: auto;
+    }
+  }
 }

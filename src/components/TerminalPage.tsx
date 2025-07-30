@@ -128,7 +128,7 @@ export const TerminalPage = () => {
       <div className="flex flex-1 overflow-hidden">
         <div className="flex flex-1 flex-col overflow-hidden">
           <div className="relative flex-1 overflow-hidden p-0 sm:p-2">
-            <div className="absolute inset-0 overflow-hidden rounded-none border-0 border-zinc-800 bg-black shadow-2xl sm:inset-2 sm:rounded-lg sm:border">
+            <div className="absolute inset-0 overflow-auto rounded-none border-0 border-zinc-800 bg-black shadow-2xl sm:inset-2 sm:overflow-hidden sm:rounded-lg sm:border">
               <Terminal
                 ref={terminalComponentRef}
                 className="h-full w-full"

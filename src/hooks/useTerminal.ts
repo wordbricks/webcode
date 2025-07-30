@@ -38,6 +38,9 @@ export const useTerminal = (
         convertEol: true,
         fontSize: isMobile ? 12 : 14,
         fontFamily: '"JetBrains Mono", "Cascadia Code", "Fira Code", monospace',
+        scrollback: isMobile ? 500 : 1000,
+        scrollOnUserInput: true,
+        smoothScrollDuration: isMobile ? 0 : 125,
         theme: {
           background: "#000000",
           foreground: "#e4e4e7",
@@ -76,7 +79,15 @@ export const useTerminal = (
       setDimensions({ cols, rows });
 
       if (options.onData) {
-        term.onData(options.onData);
+        term.onData((data) => {
+          options.onData?.(data);
+          // On mobile, ensure scroll to bottom on Enter key
+          if (isMobile && data === '\r') {
+            requestAnimationFrame(() => {
+              term.scrollToBottom();
+            });
+          }
+        });
       }
 
       if (options.onResize) {
@@ -105,8 +116,12 @@ export const useTerminal = (
   const write = useCallback(
     (data: string) => {
       terminal?.write(data);
+      // Ensure terminal scrolls to bottom on mobile after writing
+      if (isMobile && terminal) {
+        terminal.scrollToBottom();
+      }
     },
-    [terminal],
+    [terminal, isMobile],
   );
 
   const clear = useCallback(() => {
