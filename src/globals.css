@@ -146,5 +146,25 @@
     .xterm-screen {
       overflow-y: auto;
     }
+    
+    /* Handle mobile keyboard */
+    .terminal-container {
+      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
+      position: relative;
+    }
+    
+    /* Ensure terminal is visible when keyboard is open */
+    .xterm-helper-textarea {
+      position: fixed !important;
+      left: -9999px !important;
+    }
+    
+    /* Make sure terminal scrolls properly on mobile */
+    @supports (height: 100dvh) {
+      .terminal-container {
+        height: 100dvh;
+      }
+    }
   }
 }

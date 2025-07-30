@@ -6,17 +6,20 @@ import { LoadingState } from "@/src/components/LoadingState";
 import { Terminal, type TerminalHandle } from "@/src/components/Terminal";
 import { TerminalHeader } from "@/src/components/TerminalHeader";
 import { useWebContainer } from "@/src/hooks/useWebContainer";
+import { useViewportHeight } from "@/src/hooks/useViewportHeight";
 import { jshrc } from "@/src/lib/files/jshrc";
 import { templates } from "@/src/utils/registry";
 import { wait } from "@/src/utils/wait";
 
 export const TerminalPage = () => {
+  useViewportHeight();
   const { container, state, mount, spawn, readdir, writeFile } =
     useWebContainer();
   const [terminalProcess, setTerminalProcess] =
     useState<WebContainerProcess | null>(null);
   const [terminalReady, setTerminalReady] = useState(false);
   const [setupComplete, setSetupComplete] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const terminalComponentRef = useRef<TerminalHandle | null>(null);
 
   const startShell = useCallback(async () => {
@@ -52,6 +55,25 @@ export const TerminalPage = () => {
 
   const handleTerminalReady = useCallback(() => {
     setTerminalReady(true);
+  }, []);
+
+  // Handle mobile keyboard visibility
+  useEffect(() => {
+    if (typeof window === "undefined" || !("visualViewport" in window)) return;
+
+    const handleViewportChange = () => {
+      const visualViewport = window.visualViewport;
+      if (visualViewport) {
+        const keyboardHeight = window.innerHeight - visualViewport.height;
+        setKeyboardHeight(keyboardHeight);
+      }
+    };
+
+    window.visualViewport?.addEventListener("resize", handleViewportChange);
+    
+    return () => {
+      window.visualViewport?.removeEventListener("resize", handleViewportChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -94,7 +116,7 @@ export const TerminalPage = () => {
 
   if (state.status === "idle" || state.status === "booting" || !setupComplete) {
     return (
-      <div className="flex h-screen w-screen flex-col bg-zinc-950">
+      <div className="terminal-container flex w-screen flex-col bg-zinc-950">
         <TerminalHeader status={state.status} />
         <div className="flex flex-1 overflow-hidden">
           <LoadingState className="flex-1" />
@@ -105,7 +127,7 @@ export const TerminalPage = () => {
 
   if (state.status === "error") {
     return (
-      <div className="flex h-screen w-screen flex-col bg-zinc-950">
+      <div className="terminal-container flex w-screen flex-col bg-zinc-950">
         <TerminalHeader status={state.status} />
         <div className="flex flex-1 items-center justify-center overflow-hidden">
           <div className="flex flex-col items-center gap-4 text-center">
@@ -123,9 +145,9 @@ export const TerminalPage = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen flex-col bg-zinc-950">
+    <div className="terminal-container flex w-screen flex-col bg-zinc-950">
       <TerminalHeader status={state.status} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden" style={{ paddingBottom: keyboardHeight > 50 ? `${keyboardHeight}px` : 0 }}>
         <div className="flex flex-1 flex-col overflow-hidden">
           <div className="relative flex-1 overflow-hidden p-0 sm:p-2">
             <div className="absolute inset-0 overflow-auto rounded-none border-0 border-zinc-800 bg-black shadow-2xl sm:inset-2 sm:overflow-hidden sm:rounded-lg sm:border">
