@@ -71,15 +71,6 @@ export const useTerminal = (
 
       if (terminalElementRef.current) {
         term.open(terminalElementRef.current);
-        
-        // On mobile, ensure terminal is focusable for keyboard input
-        if (isMobile) {
-          const canvas = terminalElementRef.current.querySelector('canvas');
-          if (canvas) {
-            canvas.setAttribute('tabindex', '0');
-            canvas.style.outline = 'none';
-          }
-        }
       }
 
       fitAddon.fit();
@@ -151,43 +142,8 @@ export const useTerminal = (
     };
 
     window.addEventListener("resize", handleResize);
-    
-    // Handle mobile keyboard show/hide
-    if (isMobile && "visualViewport" in window) {
-      const handleViewportChange = () => {
-        const visualViewport = window.visualViewport;
-        if (visualViewport && terminal) {
-          // When keyboard is shown, viewport height decreases
-          const keyboardHeight = window.innerHeight - visualViewport.height;
-          if (keyboardHeight > 50) {
-            // Keyboard is likely shown, scroll to cursor
-            requestAnimationFrame(() => {
-              terminal.scrollToBottom();
-              // Also scroll the terminal container into view
-              const terminalElement = terminalElementRef.current;
-              if (terminalElement) {
-                const activeElement = document.activeElement;
-                if (activeElement && terminalElement.contains(activeElement)) {
-                  activeElement.scrollIntoView({ behavior: "smooth", block: "end" });
-                }
-              }
-            });
-          }
-        }
-      };
-
-      window.visualViewport?.addEventListener("resize", handleViewportChange);
-      window.visualViewport?.addEventListener("scroll", handleViewportChange);
-      
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        window.visualViewport?.removeEventListener("resize", handleViewportChange);
-        window.visualViewport?.removeEventListener("scroll", handleViewportChange);
-      };
-    }
-    
     return () => window.removeEventListener("resize", handleResize);
-  }, [fit, isMobile, terminal]);
+  }, [fit]);
 
   // useInterval(fit, 5000);
 
