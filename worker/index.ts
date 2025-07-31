@@ -13,6 +13,7 @@ import { webcontainer } from "@/worker/api/webcontainer";
 export type Bindings = {
   ASSETS: Fetcher;
   ASSET_URL: string;
+  WEBHOOK_URL: string;
 };
 
 const app = new Hono()
